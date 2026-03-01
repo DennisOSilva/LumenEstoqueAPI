@@ -34,7 +34,7 @@ public class CategoriesController : ControllerBase
         return Ok(category);
     }
 
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     [HttpPost]
     public async Task<ActionResult<CategoryReadDTO>> CreateAsync([FromBody] CategoryCreateDTO categoryCreateDTO)
     {
@@ -42,7 +42,7 @@ public class CategoriesController : ControllerBase
         return Created($"api/v1/categories/{createdCategory.Id}", createdCategory);
     }
 
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     [HttpPut("{id:int:min(1)}")]
     public async Task<ActionResult<CategoryReadDTO>> UpdateAsync([FromRoute] int id, [FromBody] CategoryUpdateDTO categoryUpdateDTO)
     {
@@ -50,7 +50,7 @@ public class CategoriesController : ControllerBase
         return Ok(updatedCategory);
     }
 
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     [HttpDelete("{id:int:min(1)}")]
     public async Task<ActionResult<CategoryReadDTO>> DeleteAsync(int id)
     {

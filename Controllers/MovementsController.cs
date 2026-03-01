@@ -58,7 +58,7 @@ public class MovementsController : ControllerBase
         return Ok(movement);
     }
 
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     [HttpPost("adjust")]
     public async Task<IActionResult> AdjustAsync([FromBody] MovementCreateDTO movementCreateDTO)
     {

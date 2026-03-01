@@ -35,7 +35,7 @@ public class SuppliersController : ControllerBase
         return Ok(supplier);
     }
 
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     [HttpPost]
     public async Task<ActionResult> CreateAsync([FromBody] SupplierCreateDTO supplierCreateDTO)
     {
@@ -43,7 +43,7 @@ public class SuppliersController : ControllerBase
         return Created($"api/v1/suppliers/{createdSupplier.Id}", createdSupplier);
     }
 
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     [HttpPut("{id:int:min(1)}")]
     public async Task<ActionResult> UpdateAsync(int id, [FromBody] SupplierUpdateDTO supplierUpdateDTO)
     {
@@ -51,7 +51,7 @@ public class SuppliersController : ControllerBase
         return Ok(updatedSupplier);
     }
 
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     [HttpDelete("{id:int:min(1)}")]
     public async Task<IActionResult> DeleteAsync(int id)
     {

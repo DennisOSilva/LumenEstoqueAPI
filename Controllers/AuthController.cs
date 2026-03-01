@@ -30,6 +30,7 @@ public class AuthController : ControllerBase
         _logger = logger;
     }
 
+    [Authorize(Roles = "Admin")]
     [HttpPost]
     [Route("CreateRole")]
     public async Task<IActionResult> CreateRole(string roleName)
@@ -56,6 +57,7 @@ public class AuthController : ControllerBase
             new ResponseDTO { Status = "Error", Message = "Role already exist." });
     }
 
+    [Authorize(Roles = "Admin")]
     [HttpPost]
     [Route("AddUserToRole")]
     public async Task<IActionResult> AddUserToRole(string email, string roleName)
@@ -209,7 +211,7 @@ public class AuthController : ControllerBase
         });
     }
 
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     [HttpPost]
     [Route("revoke/{username}")]
     public async Task<IActionResult> Revoke(string username)

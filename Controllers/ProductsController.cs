@@ -24,7 +24,7 @@ namespace LumenEstoque.Controllers
             _productService = productService;
         }
 
-        [Authorize(Roles = "User, Admin")]
+        [Authorize]
         [HttpGet]
         public async Task<ActionResult<PagedList<ProductReadDTO>>> GetAllAsync([FromQuery] ProductParameters productParameters)
         {
@@ -40,7 +40,7 @@ namespace LumenEstoque.Controllers
             return Ok(product);
         }
 
-        [Authorize(Roles = "Admin")]
+        [Authorize]
         [HttpGet("{id:int:min(1)}")]
         public async Task<ActionResult<ProductReadDTO>> GetByIdAsync(int id)
         {
@@ -56,7 +56,7 @@ namespace LumenEstoque.Controllers
             return Ok(products);
         }
 
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<ActionResult<ProductReadDTO>> CreateAsync(ProductCreateDTO productCreateDTO)
         {
@@ -64,7 +64,7 @@ namespace LumenEstoque.Controllers
             return Created($"/api/v1/products/{createdProduct.Id}", createdProduct);
         }
 
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         [HttpPut]
         public async Task<ActionResult<ProductReadDTO>> UpdateAsync(int id, ProductUpdateDTO productUpdateDTO)
         {
@@ -72,7 +72,7 @@ namespace LumenEstoque.Controllers
             return Ok(updatedProduct);
         }
 
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         [HttpPatch("{id:int:min(1)}/active")]
         public async Task<ActionResult<ProductReadDTO>> UpdateActiveAsync(int id, ProductActiveUpdateDTO productUpdateDTO)
         {
@@ -80,7 +80,7 @@ namespace LumenEstoque.Controllers
             return Ok(updatedProduct.IsActive);
         }
 
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         [HttpDelete]
         public async Task<ActionResult> DeleteAsync(int id)
         {
