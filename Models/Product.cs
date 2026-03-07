@@ -51,9 +51,11 @@ public class Product
     [Range(1, int.MaxValue, ErrorMessage = "O Fornecedor é obrigatório")]
     public int SupplierId { get; set; }
 
+    [ForeignKey("CategoryId")]
     [JsonIgnore]
     public Category? Category { get; set; }
 
+    [ForeignKey("SupplierId")]
     [JsonIgnore]
     public Supplier? Supplier { get; set; }
 

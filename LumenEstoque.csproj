@@ -5,6 +5,9 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>49fd8b67-c5b2-48ca-8ba8-d8a2ae23eb2f</UserSecretsId>
+    <BaseOutputPath></BaseOutputPath>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+    <DocumentationFile>bin\Debug\net8.0\LumenEstoque.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
