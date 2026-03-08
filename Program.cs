@@ -9,12 +9,14 @@ using LumenEstoque.Services.SupplierServices;
 using LumenEstoque.Services.TokenService;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.RateLimiting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
 using System.Text;
 using System.Text.Json.Serialization;
+using System.Threading.RateLimiting;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -58,12 +60,41 @@ builder.Services.AddSwaggerGen(c =>
 builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(policy =>
-                      {
-                          policy.WithOrigins("https://apirequest.io")
-                          .AllowAnyHeader()
-                          .AllowAnyMethod()
-                          .AllowCredentials();
-                      });
+    {
+        policy.WithOrigins("http://127.0.0.1:5500")
+        .AllowAnyHeader()
+        .AllowAnyMethod()
+        .AllowCredentials();
+    });
+});
+
+//builder.Services.AddRateLimiter(options =>
+//{
+//    options.AddFixedWindowLimiter("Fixed", limiterOptions =>
+//    {
+//        limiterOptions.PermitLimit = 1;
+//        limiterOptions.Window = TimeSpan.FromSeconds(5);
+//        limiterOptions.QueueLimit = 2;
+//        limiterOptions.QueueProcessingOrder = QueueProcessingOrder.OldestFirst;
+//    });
+//    options.RejectionStatusCode = StatusCodes.Status429TooManyRequests;
+//});
+
+builder.Services.AddRateLimiter(options =>
+{
+    options.RejectionStatusCode = StatusCodes.Status429TooManyRequests;
+
+    options.GlobalLimiter = PartitionedRateLimiter.Create<HttpContext, string>(httpcontext =>
+                            RateLimitPartition.GetFixedWindowLimiter(
+                                            partitionKey: httpcontext.User.Identity?.Name ??
+                                                          httpcontext.Request.Headers.Host.ToString(),
+                            factory: partition => new FixedWindowRateLimiterOptions
+                            {
+                                AutoReplenishment = true,
+                                PermitLimit = 2,
+                                QueueLimit = 0,
+                                Window = TimeSpan.FromSeconds(10)
+                            }));
 });
 
 var connectionString = builder.Configuration.GetConnectionString("LumenEstoqueContext")
@@ -122,6 +153,10 @@ if (app.Environment.IsDevelopment())
 app.UseMiddleware<GlobalExceptionMiddleware>();
 
 app.UseHttpsRedirection();
+
+app.UseRouting();
+
+app.UseRateLimiter();
 
 app.UseCors();
 
