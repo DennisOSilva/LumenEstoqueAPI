@@ -1,4 +1,5 @@
-﻿using LumenEstoque.DTOs.MovementsDTOs;
+﻿using Asp.Versioning;
+using LumenEstoque.DTOs.MovementsDTOs;
 using LumenEstoque.Pagination;
 using LumenEstoque.Services.MovementServices;
 using Microsoft.AspNetCore.Authorization;
@@ -7,8 +8,9 @@ using Newtonsoft.Json;
 
 namespace LumenEstoque.Controllers;
 
-[Route("api/v1/movements")]
+[Route("api/v{version:apiVersion}/movements")]
 [ApiController]
+[ApiVersion("1.0")]
 public class MovementsController : ControllerBase
 {
     private readonly IMovementService _movementService;

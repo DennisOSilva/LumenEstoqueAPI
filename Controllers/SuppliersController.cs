@@ -1,4 +1,5 @@
-﻿using LumenEstoque.DTOs.ProductsDTOs;
+﻿using Asp.Versioning;
+using LumenEstoque.DTOs.ProductsDTOs;
 using LumenEstoque.DTOs.SuppliersDTOs;
 using LumenEstoque.Pagination;
 using LumenEstoque.Services.SupplierServices;
@@ -9,8 +10,10 @@ using Newtonsoft.Json;
 
 namespace LumenEstoque.Controllers;
 
-[Route("api/v1/suppliers")]
+[Route("api/v{version:apiVersion}/suppliers")]
 [ApiController]
+[ApiVersion("1.0")]
+
 public class SuppliersController : ControllerBase
 {
     private readonly ISupplierService _supplierService;

@@ -1,4 +1,5 @@
-﻿using LumenEstoque.Pagination;
+﻿using Asp.Versioning;
+using LumenEstoque.Pagination;
 using LumenEstoque.Services.ReportServices;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -6,8 +7,10 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace LumenEstoque.Controllers
 {
-    [Route("api/v1/report")]
+    [Route("api/v{version:apiVersion}/report")]
     [ApiController]
+    [ApiVersion("1.0")]
+
     public class ReportsController : ControllerBase
     {
         private readonly IReportService _reportService;

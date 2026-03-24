@@ -1,3 +1,4 @@
+using Asp.Versioning;
 using LumenEstoque;
 using LumenEstoque.Context;
 using LumenEstoque.Models;
@@ -26,8 +27,9 @@ builder.Services.AddControllers().AddJsonOptions(options =>
 {
     options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
 });
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
 builder.Services.AddEndpointsApiExplorer();
+
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo
@@ -68,17 +70,17 @@ builder.Services.AddCors(options =>
     });
 });
 
-//builder.Services.AddRateLimiter(options =>
-//{
-//    options.AddFixedWindowLimiter("Fixed", limiterOptions =>
-//    {
-//        limiterOptions.PermitLimit = 1;
-//        limiterOptions.Window = TimeSpan.FromSeconds(5);
-//        limiterOptions.QueueLimit = 2;
-//        limiterOptions.QueueProcessingOrder = QueueProcessingOrder.OldestFirst;
-//    });
-//    options.RejectionStatusCode = StatusCodes.Status429TooManyRequests;
-//});
+builder.Services.AddApiVersioning(options =>
+{
+    options.AssumeDefaultVersionWhenUnspecified = true;
+    options.DefaultApiVersion = new ApiVersion(1, 0);
+    options.ReportApiVersions = true;
+    options.ApiVersionReader = new UrlSegmentApiVersionReader();
+}).AddApiExplorer(options =>
+{
+    options.GroupNameFormat = "'v'VVV";
+    options.SubstituteApiVersionInUrl = true;
+});
 
 builder.Services.AddRateLimiter(options =>
 {

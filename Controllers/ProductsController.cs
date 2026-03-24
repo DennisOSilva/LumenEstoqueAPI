@@ -1,4 +1,5 @@
-﻿using LumenEstoque.Context;
+﻿using Asp.Versioning;
+using LumenEstoque.Context;
 using LumenEstoque.DTOs.Mapping;
 using LumenEstoque.DTOs.ProductsDTOs;
 using LumenEstoque.Models;
@@ -13,8 +14,9 @@ using System.Linq;
 
 namespace LumenEstoque.Controllers
 {
-    [Route("api/v1/products")]
+    [Route("api/v{version:apiVersion}/products")]
     [ApiController]
+    [ApiVersion("1.0")]
     public class ProductsController : ControllerBase
     {
         private readonly IProductService _productService;

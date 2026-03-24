@@ -1,4 +1,5 @@
-﻿using LumenEstoque.DTOs.CategoriesDTOs;
+﻿using Asp.Versioning;
+using LumenEstoque.DTOs.CategoriesDTOs;
 using LumenEstoque.Models;
 using LumenEstoque.Pagination;
 using LumenEstoque.Services.CategoryService;
@@ -8,8 +9,9 @@ using Newtonsoft.Json;
 
 namespace LumenEstoque.Controllers;
 
-[Route("api/v1/categories")]
+[Route("api/v{version:apiVersion}/categories")]
 [ApiController]
+[ApiVersion("1.0")]
 public class CategoriesController : ControllerBase
 {
     private readonly ICategoryService _categoryService;
@@ -39,7 +41,7 @@ public class CategoriesController : ControllerBase
     public async Task<ActionResult<CategoryReadDTO>> CreateAsync([FromBody] CategoryCreateDTO categoryCreateDTO)
     {
         var createdCategory = await _categoryService.CreateAsync(categoryCreateDTO);
-        return Created($"api/v1/categories/{createdCategory.Id}", createdCategory);
+        return CreatedAtAction(nameof(GetByIdAsync), new { id = createdCategory.Id }, createdCategory);
     }
 
     [Authorize(Roles = "Admin")]

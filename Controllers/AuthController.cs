@@ -1,4 +1,5 @@
-﻿using LumenEstoque.DTOs.IdentityDTOs;
+﻿using Asp.Versioning;
+using LumenEstoque.DTOs.IdentityDTOs;
 using LumenEstoque.Models;
 using LumenEstoque.Services.TokenService;
 using Microsoft.AspNetCore.Authorization;
@@ -11,8 +12,9 @@ using System.Security.Claims;
 
 namespace LumenEstoque.Controllers;
 
-[Route("api/v1/auth")]
+[Route("api/v{version:apiVersion}/auth")]
 [ApiController]
+[ApiVersion("1.0")]
 public class AuthController : ControllerBase
 {
     private readonly ITokenService _tokenService;
