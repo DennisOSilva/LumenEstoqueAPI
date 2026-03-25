@@ -37,11 +37,26 @@ builder.Services.AddSwaggerGen(c =>
         Title = "LumenEstoque API",
         Version = "v1",
         Description = "API para gerenciamento de estoque",
-    });
+        Contact = new OpenApiContact
+        {
+            Name = "Dennis",
+            Email = "dennis.osilva25@gmail.com"
+        }
+        });
 
     var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
     var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
     c.IncludeXmlComments(xmlPath);
+
+    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        Name = "Authorization",
+        Type = SecuritySchemeType.ApiKey,
+        Scheme = "Bearer",
+        BearerFormat = "JWT",
+        In = ParameterLocation.Header,
+        Description = "Insira o token JWT no formato: Bearer {seu token}"
+    });
 
     c.AddSecurityRequirement(new OpenApiSecurityRequirement
     {
