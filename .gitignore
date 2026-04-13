@@ -43,5 +43,4 @@ _ReSharper*/
 Generated Files/
 
 # Configurações sensíveis
-appsettings.json
 appsettings.Development.json

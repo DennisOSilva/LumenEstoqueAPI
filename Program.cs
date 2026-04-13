@@ -157,6 +157,7 @@ builder.Services.AddScoped<ITokenService, TokenService>();
 
 builder.Services.AddAuthorization();
 
+builder.Services.AddMemoryCache();
 
 var app = builder.Build();
 
