@@ -12,6 +12,6 @@ WORKDIR /app
 
 COPY --from=build /app/out .
 
-EXPOSE 8080
+EXPOSE 10000
 
 ENTRYPOINT ["dotnet", "LumenEstoque.dll"]
