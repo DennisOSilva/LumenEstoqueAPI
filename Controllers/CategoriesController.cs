@@ -77,7 +77,7 @@ public class CategoriesController : ControllerBase
     /// </remarks>
     /// <param name="id">Identificador único da categoria. Deve ser maior ou igual a 1.</param>
     /// <returns>A categoria correspondente ao <paramref name="id"/> informado.</returns>
-    [Authorize]
+    //[Authorize]
     [HttpGet("{id:int:min(1)}")]
     public async Task<ActionResult<CategoryReadDTO>> GetByIdAsync(int id)
     {
@@ -119,7 +119,7 @@ public class CategoriesController : ControllerBase
     /// </remarks>
     /// <param name="categoryCreateDTO">Dados da categoria a ser criada.</param>
     /// <returns>A categoria recém-criada com seu identificador gerado.</returns>
-    [Authorize(Roles = "Admin")]
+    //[Authorize(Roles = "Admin")]
     [HttpPost]
     public async Task<ActionResult<CategoryReadDTO>> CreateAsync([FromBody] CategoryCreateDTO categoryCreateDTO)
     {
@@ -160,7 +160,7 @@ public class CategoriesController : ControllerBase
     /// <param name="id">Identificador único da categoria a ser atualizada. Deve ser maior ou igual a 1.</param>
     /// <param name="categoryUpdateDTO">Dados atualizados da categoria.</param>
     /// <returns>A categoria com os dados atualizados.</returns>
-    [Authorize(Roles = "Admin")]
+    //[Authorize(Roles = "Admin")]
     [HttpPut("{id:int:min(1)}")]
     public async Task<ActionResult<CategoryReadDTO>> UpdateAsync([FromRoute] int id, [FromBody] CategoryUpdateDTO categoryUpdateDTO)
     {
@@ -189,7 +189,7 @@ public class CategoriesController : ControllerBase
     /// </remarks>
     /// <param name="id">Identificador único da categoria a ser removida. Deve ser maior ou igual a 1.</param>
     /// <returns>A categoria que foi removida.</returns>
-    [Authorize(Roles = "Admin")]
+    //[Authorize(Roles = "Admin")]
     [HttpDelete("{id:int:min(1)}")]
     public async Task<ActionResult<CategoryReadDTO>> DeleteAsync(int id)
     {
