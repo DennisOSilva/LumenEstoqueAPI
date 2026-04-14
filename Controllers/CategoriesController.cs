@@ -138,7 +138,7 @@ public class CategoriesController : ControllerBase
 
         _cache.Set(cacheKey, createdCategory, cacheOptions);
 
-        return CreatedAtAction(nameof(GetByIdAsync), new { id = createdCategory.Id }, createdCategory);
+        return Ok(createdCategory);
     }
 
     /// <summary>
