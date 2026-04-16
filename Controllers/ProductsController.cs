@@ -57,7 +57,7 @@ namespace LumenEstoque.Controllers
         /// </remarks>
         /// <param name="productParameters">Parâmetros de paginação, filtro e ordenação da consulta.</param>
         /// <returns>Uma lista paginada de produtos.</returns>
-        [Authorize]
+        //[Authorize]
         [HttpGet]
         public async Task<ActionResult<PagedList<ProductReadDTO>>> GetAllAsync([FromQuery] ProductParameters productParameters)
         {
@@ -78,7 +78,7 @@ namespace LumenEstoque.Controllers
         /// </remarks>
         /// <param name="sku">SKU único do produto.</param>
         /// <returns>O produto correspondente ao <paramref name="sku"/> informado.</returns>
-        [Authorize]
+        //[Authorize]
         [HttpGet("sku/{sku}")]
         public async Task<ActionResult<ProductReadDTO>> GetBySkuAsync(string sku)
         {
@@ -99,7 +99,7 @@ namespace LumenEstoque.Controllers
         /// </remarks>
         /// <param name="id">Identificador único do produto. Deve ser maior ou igual a 1.</param>
         /// <returns>O produto correspondente ao <paramref name="id"/> informado.</returns>
-        [Authorize]
+        //[Authorize]
         [HttpGet("{id:int:min(1)}")]
         public async Task<ActionResult<ProductReadDTO>> GetByIdAsync(int id)
         {
@@ -164,7 +164,7 @@ namespace LumenEstoque.Controllers
         /// </remarks>
         /// <param name="productCreateDTO">Dados do produto a ser criado.</param>
         /// <returns>O produto recém-criado com seu identificador gerado.</returns>
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<ActionResult<ProductReadDTO>> CreateAsync(ProductCreateDTO productCreateDTO)
         {

@@ -215,4 +215,5 @@ public class CategoriesController : ControllerBase
         Response.Headers.Append("X-Pagination", JsonConvert.SerializeObject(metadata));
         return Ok(categories);
     }
+
 }
