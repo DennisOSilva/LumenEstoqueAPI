@@ -39,7 +39,7 @@ public class SuppliersController : ControllerBase
     /// </remarks>
     /// <param name="supplierParameters">Parâmetros de paginação e filtro da consulta.</param>
     /// <returns>Uma lista paginada de fornecedores.</returns>
-    [Authorize]
+    //[Authorize]
     [HttpGet]
     public async Task<ActionResult<PagedList<SupplierReadDTO>>> GetAllAsync([FromQuery] SupplierParameters supplierParameters)
     {
@@ -60,7 +60,7 @@ public class SuppliersController : ControllerBase
     /// </remarks>
     /// <param name="id">Identificador único do fornecedor. Deve ser maior ou igual a 1.</param>
     /// <returns>O fornecedor correspondente ao <paramref name="id"/> informado.</returns>
-    [Authorize]
+    //[Authorize]
     [HttpGet("{id:int:min(1)}")]
     public async Task<ActionResult> GetByIdAsync(int id)
     {
@@ -87,7 +87,7 @@ public class SuppliersController : ControllerBase
     /// </remarks>
     /// <param name="supplierCreateDTO">Dados do fornecedor a ser criado.</param>
     /// <returns>O fornecedor recém-criado com seu identificador gerado.</returns>
-    [Authorize(Roles = "Admin")]
+    //[Authorize(Roles = "Admin")]
     [HttpPost]
     public async Task<ActionResult> CreateAsync([FromBody] SupplierCreateDTO supplierCreateDTO)
     {
@@ -115,7 +115,7 @@ public class SuppliersController : ControllerBase
     /// <param name="id">Identificador único do fornecedor a ser atualizado. Deve ser maior ou igual a 1.</param>
     /// <param name="supplierUpdateDTO">Dados atualizados do fornecedor.</param>
     /// <returns>O fornecedor com os dados atualizados.</returns>
-    [Authorize(Roles = "Admin")]
+    //[Authorize(Roles = "Admin")]
     [HttpPut("{id:int:min(1)}")]
     public async Task<ActionResult> UpdateAsync(int id, [FromBody] SupplierUpdateDTO supplierUpdateDTO)
     {
@@ -134,7 +134,7 @@ public class SuppliersController : ControllerBase
     /// </remarks>
     /// <param name="id">Identificador único do fornecedor a ser removido. Deve ser maior ou igual a 1.</param>
     /// <returns>O fornecedor que foi removido.</returns>
-    [Authorize(Roles = "Admin")]
+    //[Authorize(Roles = "Admin")]
     [HttpDelete("{id:int:min(1)}")]
     public async Task<IActionResult> DeleteAsync(int id)
     {
