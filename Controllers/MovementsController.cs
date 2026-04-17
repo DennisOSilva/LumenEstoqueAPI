@@ -35,7 +35,7 @@ public class MovementsController : ControllerBase
     /// </remarks>
     /// <param name="movementParameters">Parâmetros de paginação e filtragem.</param>
     /// <returns>Lista paginada de movimentações.</returns>
-    [Authorize]
+    //[Authorize]
     [HttpGet]
     public async Task<ActionResult<PagedList<MovementReadDTO>>> GetAllAsync([FromQuery] MovementParameters movementParameters)
     {
@@ -56,7 +56,7 @@ public class MovementsController : ControllerBase
     /// </remarks>
     /// <param name="id">ID da movimentação.</param>
     /// <returns>Dados da movimentação.</returns>
-    [Authorize]
+    //[Authorize]
     [HttpGet("{id:int:min(1)}")]
     public async Task<ActionResult<MovementReadDTO>> GetByIdAsync(int id)
     {
@@ -78,7 +78,7 @@ public class MovementsController : ControllerBase
     /// <param name="id">ID do produto.</param>
     /// <param name="movementParameters">Parâmetros de paginação.</param>
     /// <returns>Lista paginada de movimentações do produto.</returns>
-    [Authorize]
+    //[Authorize]
     [HttpGet("product/{id:int:min(1)}")]
     public async Task<ActionResult<PagedList<MovementReadDTO>>> GetByProduct([FromRoute] int id, [FromQuery] MovementParameters movementParameters)
     {
@@ -99,7 +99,7 @@ public class MovementsController : ControllerBase
     /// </remarks>
     /// <param name="movementCreateDTO">Dados da movimentação de entrada.</param>
     /// <returns>Movimentação criada.</returns>
-    [Authorize]
+    //[Authorize]
     [HttpPost("in")]
     public async Task<ActionResult<MovementReadDTO>> InAsync([FromBody] MovementCreateDTO movementCreateDTO)
     {
@@ -120,7 +120,7 @@ public class MovementsController : ControllerBase
     /// </remarks>
     /// <param name="movementCreateDTO">Dados da movimentação de saída.</param>
     /// <returns>Movimentação criada.</returns>
-    [Authorize]
+    //[Authorize]
     [HttpPost("out")]
     public async Task<IActionResult> OutAsync([FromBody] MovementCreateDTO movementCreateDTO)
     {
@@ -141,7 +141,7 @@ public class MovementsController : ControllerBase
     /// </remarks>
     /// <param name="movementCreateDTO">Dados do ajuste.</param>
     /// <returns>Movimentação de ajuste realizada.</returns>
-    [Authorize(Roles = "Admin")]
+    //[Authorize(Roles = "Admin")]
     [HttpPost("adjust")]
     public async Task<IActionResult> AdjustAsync([FromBody] MovementCreateDTO movementCreateDTO)
     {
