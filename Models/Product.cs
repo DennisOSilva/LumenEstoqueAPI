@@ -52,11 +52,9 @@ public class Product
     public int SupplierId { get; set; }
 
     [ForeignKey("CategoryId")]
-    [JsonIgnore]
     public Category? Category { get; set; }
 
     [ForeignKey("SupplierId")]
-    [JsonIgnore]
     public Supplier? Supplier { get; set; }
 
 }
