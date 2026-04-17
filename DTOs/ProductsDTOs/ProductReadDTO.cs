@@ -39,5 +39,9 @@ namespace LumenEstoque.DTOs.ProductsDTOs
 
         public Supplier? Supplier { get; set; }
 
+        public string? CategoryName { get; set; }
+
+        public string? SupplierName { get; set; }
+
     }
 }

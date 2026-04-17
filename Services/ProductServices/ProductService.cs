@@ -34,8 +34,8 @@ public class ProductService : IProductService
     public async Task<PagedList<ProductReadDTO>> GetAllAsync(ProductParameters productParameters)
     {
         IQueryable<Product> query = _context.Products!
-        .Include(p => p.Supplier)
-        .Include(p => p.Category);
+            .Include(p => p.Supplier)
+            .Include(p => p.Category);
 
         if (!string.IsNullOrEmpty(productParameters.search))
             query = query.Where(p => p.Name.Contains(productParameters.search) ||

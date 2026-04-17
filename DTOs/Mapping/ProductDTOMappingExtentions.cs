@@ -51,7 +51,9 @@ public static class ProductDTOMappingExtentions
             CreatedAt = product.CreatedAt,
             UpdatedAt = product.UpdatedAt,
             CategoryId = product.CategoryId,
-            SupplierId = product.SupplierId
+            SupplierId = product.SupplierId,
+            CategoryName = product.Category?.Name,
+            SupplierName = product.Supplier?.Name
         };
     }
 
