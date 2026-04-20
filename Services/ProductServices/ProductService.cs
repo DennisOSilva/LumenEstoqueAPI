@@ -22,7 +22,10 @@ public class ProductService : IProductService
 
     public async Task<ProductReadDTO?> GetByIdAsync(int id)
     {
-        var product = await _context.Products.FirstOrDefaultAsync(p => p.Id == id);
+        var product = await _context.Products
+            .Include(p => p.Supplier)
+            .Include(p => p.Category)
+            .FirstOrDefaultAsync(p => p.Id == id);
 
         if (product == null)
         {
