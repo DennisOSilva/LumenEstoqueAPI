@@ -11,6 +11,8 @@ namespace LumenEstoque.DTOs.ProductsDTOs
 
         public string? Sku { get; set; }
 
+        public string? Ean { get; set; } 
+
         public string? Name { get; set; }
 
         public string? Description { get; set; }
@@ -35,8 +37,10 @@ namespace LumenEstoque.DTOs.ProductsDTOs
 
         public int SupplierId { get; set; }
 
+        [JsonIgnore]
         public Category? Category { get; set; }
 
+        [JsonIgnore]
         public Supplier? Supplier { get; set; }
 
         public string? CategoryName { get; set; }

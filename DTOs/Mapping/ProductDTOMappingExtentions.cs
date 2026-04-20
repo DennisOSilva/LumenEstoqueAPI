@@ -10,6 +10,7 @@ public static class ProductDTOMappingExtentions
         return new Product
         {
             Sku = dto.Sku,
+            Ean = dto.Ean,
             Name = dto.Name,
             Description = dto.Description,
             CostPrice = dto.CostPrice,
@@ -25,6 +26,7 @@ public static class ProductDTOMappingExtentions
     public static void ToUpdate(this Product product, ProductUpdateDTO dto)
     {
         product.Name = dto.Name;
+        product.Ean = dto.Ean;
         product.Description = dto.Description;
         product.CostPrice = dto.CostPrice;
         product.Price = dto.Price;
@@ -39,6 +41,7 @@ public static class ProductDTOMappingExtentions
         return new ProductReadDTO
         {
             Id = product.Id,
+            Ean = product.Ean,
             Sku = product.Sku,
             Name = product.Name,
             Description = product.Description,

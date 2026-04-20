@@ -6,6 +6,7 @@ using LumenEstoque.Models;
 using LumenEstoque.Pagination;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 
 namespace LumenEstoque.Services.ProductServices;
 
@@ -39,7 +40,8 @@ public class ProductService : IProductService
 
         if (!string.IsNullOrEmpty(productParameters.search))
             query = query.Where(p => p.Name.Contains(productParameters.search) ||
-                                     p.Sku.Contains(productParameters.search));
+                                     p.Sku.Contains(productParameters.search) ||
+                                     p.Ean.Contains(productParameters.search));
 
         if (productParameters.categoryId.HasValue)
         {
@@ -80,14 +82,31 @@ public class ProductService : IProductService
     public async Task<ProductReadDTO> CreateAsync(ProductCreateDTO productCreateDTO)
     {
         var product = productCreateDTO.ToEntity();
-        if(product == null)
+        var products = await _context.Products!.ToListAsync();
+
+        if (product == null)
         {
             throw new ArgumentException("Erro ao converter ProductCreateDTO para Product");
         }
 
         if (!string.IsNullOrEmpty(product.Sku))
         {
+            var skuExiste = await _context.Products!.AnyAsync(p => p.Sku == product.Sku);
+            if (skuExiste)
+            {
+                throw new ArgumentException("Já existe um produto com esse código SKU");
+            }   
+
             product.Sku = product.Sku.ToUpper();
+        }
+
+        if (!string.IsNullOrEmpty(product.Ean))
+        {
+            var eanExiste = await _context.Products!.AnyAsync(p => p.Ean == product.Ean);
+            if (eanExiste)
+            {
+                throw new ArgumentException("Já existe um produto com esse código de barras");
+            }     
         }
 
         await _context.Products!.AddAsync(product);
@@ -101,6 +120,11 @@ public class ProductService : IProductService
         if (product == null)
         {
             throw new KeyNotFoundException($"Produto com ID {id} não encontrado");
+        }
+
+        if (!string.IsNullOrEmpty(product.Ean))
+        {
+            throw new ArgumentException("O código de barras (EAN) não pode ser alterado");
         }
 
         product.UpdatedAt = DateTime.Now;

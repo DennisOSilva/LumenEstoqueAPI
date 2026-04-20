@@ -11,6 +11,9 @@ namespace LumenEstoque.DTOs.ProductsDTOs
         [StringLength(50, MinimumLength = 3, ErrorMessage = "O Nome deve ter entre 3 e 50 caracteres")]
         public string? Name { get; set; }
 
+        [RegularExpression(@"^(\d{8}|\d{13})?$", ErrorMessage = "O EAN deve ter 8 ou 13 dígitos numéricos.")]
+        public string? Ean { get; set; }
+
         [StringLength(200, ErrorMessage = "A Descrição pode ter no máximo 200 caracteres")]
         public string? Description { get; set; }
 

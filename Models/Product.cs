@@ -14,6 +14,9 @@ public class Product
     [StringLength(30, MinimumLength = 3, ErrorMessage = "O SKU deve ter entre 3 e 30 caracteres")]
     public string? Sku { get; set; }
 
+    [RegularExpression(@"^(\d{8}|\d{13})?$", ErrorMessage = "O EAN deve ter 8 ou 13 dígitos numéricos.")]
+    public string? Ean { get; set; }
+
     [Required(ErrorMessage = "O Nome é obrigatório")]
     [StringLength(50, MinimumLength = 3, ErrorMessage = "O Nome deve ter entre 3 e 50 caracteres")]
     public string? Name { get; set; }
