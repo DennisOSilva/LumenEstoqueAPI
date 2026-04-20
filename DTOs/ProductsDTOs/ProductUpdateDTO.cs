@@ -7,7 +7,6 @@ namespace LumenEstoque.DTOs.ProductsDTOs
 {
     public class ProductUpdateDTO
     {
-        [Required(ErrorMessage = "O Nome é obrigatório")]
         [StringLength(50, MinimumLength = 3, ErrorMessage = "O Nome deve ter entre 3 e 50 caracteres")]
         public string? Name { get; set; }
 
@@ -25,17 +24,16 @@ namespace LumenEstoque.DTOs.ProductsDTOs
         [Range(0.01, 99999999.99, ErrorMessage = "O Preço deve ser um valor positivo com até 2 casas decimais")]
         public decimal Price { get; set; } = 0;
 
-        [Required(ErrorMessage = "A Unidade é obrigatória")]
         [StringLength(5, MinimumLength = 1, ErrorMessage = "A Unidade deve ter entre 1 e 5 caracteres")]
         public string Unit { get; set; } = "un";
 
         [Range(1, int.MaxValue, ErrorMessage = "A Categoria é obrigatória")]
-        public int CategoryId { get; set; }
+        public int? CategoryId { get; set; }
 
         [Range(1, int.MaxValue, ErrorMessage = "O Fornecedor é obrigatório")]
-        public int SupplierId { get; set; }
+        public int? SupplierId { get; set; }
 
         [Range(0, int.MaxValue, ErrorMessage = "O estoque mínimo deve ser um valor inteiro não negativo")]
-        public int MinStock { get; set; } = 5;
+        public int? MinStock { get; set; } = 5;
     }
 }

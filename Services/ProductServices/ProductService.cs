@@ -122,7 +122,7 @@ public class ProductService : IProductService
             throw new KeyNotFoundException($"Produto com ID {id} não encontrado");
         }
 
-        if (!string.IsNullOrEmpty(product.Ean))
+        if (!string.IsNullOrEmpty(product.Ean) && !string.IsNullOrEmpty(productUpdateDTO.Ean) && product.Ean != productUpdateDTO.Ean)
         {
             throw new ArgumentException("O código de barras (EAN) não pode ser alterado");
         }
