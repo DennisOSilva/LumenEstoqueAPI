@@ -18,11 +18,11 @@ namespace LumenEstoque.DTOs.ProductsDTOs
 
         [Column(TypeName = "decimal(10,2)")]
         [Range(0.01, 99999999.99, ErrorMessage = "O Preço de Custo deve ser um valor positivo com até 2 casas decimais")]
-        public decimal? CostPrice { get; set; } = 0;
+        public decimal? CostPrice { get; set; } = null;
 
         [Column(TypeName = "decimal(10,2)")]
         [Range(0.01, 99999999.99, ErrorMessage = "O Preço deve ser um valor positivo com até 2 casas decimais")]
-        public decimal? Price { get; set; } = 0;
+        public decimal? Price { get; set; } = null;
 
         [StringLength(5, MinimumLength = 1, ErrorMessage = "A Unidade deve ter entre 1 e 5 caracteres")]
         public string? Unit { get; set; } = "un";
