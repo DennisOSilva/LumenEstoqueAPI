@@ -134,7 +134,7 @@ namespace LumenEstoque.Controllers
         /// </remarks>
         /// <param name="productParameters">Parâmetros de paginação e filtro da consulta.</param>
         /// <returns>Lista de produtos com estoque no nível mínimo ou abaixo.</returns>
-        [Authorize]
+        //[Authorize]
         [HttpGet("min-stock")]
         public async Task<ActionResult<IEnumerable<ProductReadDTO>>> GetProductsWithMinStockAsync([FromQuery] ProductParameters productParameters)
         {
@@ -195,7 +195,7 @@ namespace LumenEstoque.Controllers
         /// <param name="id">Identificador único do produto a ser atualizado.</param>
         /// <param name="productUpdateDTO">Dados atualizados do produto.</param>
         /// <returns>O produto com os dados atualizados.</returns>
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         [HttpPut]
         public async Task<ActionResult<ProductReadDTO>> UpdateAsync(int id, ProductUpdateDTO productUpdateDTO)
         {
@@ -221,7 +221,7 @@ namespace LumenEstoque.Controllers
         /// <param name="id">Identificador único do produto. Deve ser maior ou igual a 1.</param>
         /// <param name="productUpdateDTO">Objeto contendo o novo valor de <c>IsActive</c>.</param>
         /// <returns>O valor atualizado de <c>IsActive</c> do produto.</returns>
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         [HttpPatch("{id:int:min(1)}/active")]
         public async Task<ActionResult<ProductReadDTO>> UpdateActiveAsync(int id, ProductActiveUpdateDTO productUpdateDTO)
         {
@@ -240,7 +240,7 @@ namespace LumenEstoque.Controllers
         /// </remarks>
         /// <param name="id">Identificador único do produto a ser removido.</param>
         /// <returns>O produto que foi removido.</returns>
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         [HttpDelete]
         public async Task<ActionResult> DeleteAsync(int id)
         {
