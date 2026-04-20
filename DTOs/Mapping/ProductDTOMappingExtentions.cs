@@ -25,17 +25,17 @@ public static class ProductDTOMappingExtentions
 
     public static void ToUpdate(this Product product, ProductUpdateDTO dto)
     {
-        product.Name = dto.Name;
-        product.Ean = dto.Ean;
-        product.Description = dto.Description;
-        product.CostPrice = dto.CostPrice;
-        product.Price = dto.Price;
-        product.Unit = dto.Unit;
-        product.MinStock = dto.MinStock;
-        product.CategoryId = dto.CategoryId;
-        product.SupplierId = dto.SupplierId;
-    }
+        if (!string.IsNullOrEmpty(dto.Name)) product.Name = dto.Name;
+        if (!string.IsNullOrEmpty(dto.Description)) product.Description = dto.Description;
+        if (!string.IsNullOrEmpty(dto.Unit)) product.Unit = dto.Unit;
+        if (!string.IsNullOrEmpty(dto.Ean) && string.IsNullOrEmpty(product.Ean)) product.Ean = dto.Ean;
 
+        product.CostPrice = dto.CostPrice ?? product.CostPrice;
+        product.Price = dto.Price ?? product.Price;
+        product.MinStock = dto.MinStock ?? product.MinStock;
+        product.CategoryId = dto.CategoryId ?? product.CategoryId;
+        product.SupplierId = dto.SupplierId ?? product.SupplierId;
+    }
     public static ProductReadDTO ToReadDTO(this Product product)
     {
         return new ProductReadDTO
