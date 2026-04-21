@@ -33,6 +33,9 @@ namespace LumenEstoque.DTOs.ProductsDTOs
         [StringLength(5, MinimumLength = 1, ErrorMessage = "A Unidade deve ter entre 1 e 5 caracteres")]
         public string Unit { get; set; } = "un";
 
+        [Range(0, int.MaxValue, ErrorMessage = "A quantidade em estoque deve ser um valor inteiro não negativo")]
+        public int StockQuantity { get; set; } = 0;
+
         [Range(0, int.MaxValue, ErrorMessage = "O estoque mínimo deve ser um valor inteiro não negativo")]
         public int MinStock { get; set; } = 5;
 

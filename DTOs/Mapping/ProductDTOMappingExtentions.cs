@@ -18,6 +18,7 @@ public static class ProductDTOMappingExtentions
             Unit = dto.Unit,
             IsActive = dto.IsActive,
             MinStock = dto.MinStock,
+            StockQuantity = dto.StockQuantity,
             CategoryId = dto.CategoryId,
             SupplierId = dto.SupplierId
         };
