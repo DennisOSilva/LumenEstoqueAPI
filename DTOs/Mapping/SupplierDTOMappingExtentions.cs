@@ -14,7 +14,8 @@ public static class SupplierDTOMappingExtentions
             Phone = dto.Phone,
             Email = dto.Email,
             Address = dto.Address,
-            IsActive = dto.IsActive,
+            Url = dto.Url,
+            IsActive = dto.IsActive
         };
     }
 
@@ -24,6 +25,7 @@ public static class SupplierDTOMappingExtentions
         supplier.Phone = dto.Phone;
         supplier.Email = dto.Email;
         supplier.Address = dto.Address;
+        supplier.Url = dto.Url;
         supplier.IsActive = dto.IsActive;
     }
 
@@ -37,9 +39,10 @@ public static class SupplierDTOMappingExtentions
             Phone = supplier.Phone,
             Email = supplier.Email,
             Address = supplier.Address,
+            Url = supplier.Url,
             IsActive = supplier.IsActive,
             CreatedAt = supplier.CreatedAt,
-            UpdatedAt = supplier.UpdatedAt,
+            UpdatedAt = supplier.UpdatedAt
         };
     }
 
