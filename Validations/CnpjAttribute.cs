@@ -6,9 +6,10 @@ public class CnpjAttribute : ValidationAttribute
 {
     protected override ValidationResult? IsValid(object? value, ValidationContext context)
     {
-        if (value is null) return new ValidationResult("CNPJ é obrigatório");
-
         var cnpj = value.ToString()!.Replace(".", "").Replace("/", "").Replace("-", "");
+
+        if (value is null || string.IsNullOrWhiteSpace(value.ToString()))
+            return ValidationResult.Success;
 
         if (cnpj.Length != 14 || cnpj.Distinct().Count() == 1)
             return new ValidationResult("CNPJ inválido");

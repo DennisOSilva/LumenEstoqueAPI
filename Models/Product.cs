@@ -49,7 +49,7 @@ public class Product
     public DateTime UpdatedAt { get; set; } = DateTime.Now;
 
     [Url(ErrorMessage = "URL inválida.")]
-    public string? Url { get; set; }
+    public string? Url { get; set; } = null;
 
     [Range(1, int.MaxValue, ErrorMessage = "A Categoria é obrigatória")]
     public int CategoryId { get; set; }
