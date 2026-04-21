@@ -6,6 +6,7 @@ public class ProductParameters : QueryStringParameters
 {
     public string? search { get; set; }
     public int? categoryId { get; set; }
+    public int? supplierId { get; set; }
     public bool lowStock { get; set; } = false;
     public bool zeroStock { get; set; } = false;
     public bool active { get; set; } = true;

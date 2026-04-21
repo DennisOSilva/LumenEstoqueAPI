@@ -50,8 +50,13 @@ public class ProductService : IProductService
         {
             query = query.Where(p => p.CategoryId == productParameters.categoryId);
         }
-            
-        if(productParameters.zeroStock == true)
+
+        if (productParameters.supplierId.HasValue)
+        {
+            query = query.Where(p => p.SupplierId == productParameters.supplierId);
+        }
+
+        if (productParameters.zeroStock == true)
         {
             query = query.Where(p => p.StockQuantity == 0);
         }
