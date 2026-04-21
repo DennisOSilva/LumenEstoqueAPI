@@ -39,6 +39,9 @@ namespace LumenEstoque.DTOs.ProductsDTOs
         [Range(0, int.MaxValue, ErrorMessage = "O estoque mínimo deve ser um valor inteiro não negativo")]
         public int MinStock { get; set; } = 5;
 
+        [Url(ErrorMessage = "URL inválida.")]
+        public string? Url { get; set; }
+
         public bool IsActive { get; set; } = true;
 
         [Range(1, int.MaxValue, ErrorMessage = "A Categoria é obrigatória")]

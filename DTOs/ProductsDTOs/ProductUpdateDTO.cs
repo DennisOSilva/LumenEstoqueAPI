@@ -27,6 +27,9 @@ namespace LumenEstoque.DTOs.ProductsDTOs
         [StringLength(5, MinimumLength = 1, ErrorMessage = "A Unidade deve ter entre 1 e 5 caracteres")]
         public string? Unit { get; set; } = "un";
 
+        [Url(ErrorMessage = "URL inválida.")]
+        public string? Url { get; set; }
+
         [Range(1, int.MaxValue, ErrorMessage = "A Categoria é obrigatória")]
         public int? CategoryId { get; set; }
 

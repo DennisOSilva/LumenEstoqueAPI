@@ -17,6 +17,7 @@ public static class ProductDTOMappingExtentions
             Price = dto.Price,
             Unit = dto.Unit,
             IsActive = dto.IsActive,
+            Url = dto.Url,
             MinStock = dto.MinStock,
             StockQuantity = dto.StockQuantity,
             CategoryId = dto.CategoryId,
@@ -30,6 +31,7 @@ public static class ProductDTOMappingExtentions
         if (!string.IsNullOrEmpty(dto.Description)) product.Description = dto.Description;
         if (!string.IsNullOrEmpty(dto.Unit)) product.Unit = dto.Unit;
         if (!string.IsNullOrEmpty(dto.Ean) && string.IsNullOrEmpty(product.Ean)) product.Ean = dto.Ean;
+        if (!string.IsNullOrEmpty(dto.Url) && string.IsNullOrEmpty(product.Url)) product.Url = dto.Url;
 
         product.CostPrice = dto.CostPrice ?? product.CostPrice;
         product.Price = dto.Price ?? product.Price;
@@ -52,6 +54,7 @@ public static class ProductDTOMappingExtentions
             MinStock = product.MinStock,
             Unit = product.Unit,
             IsActive = product.IsActive,
+            Url = product.Url,
             CreatedAt = product.CreatedAt,
             UpdatedAt = product.UpdatedAt,
             CategoryId = product.CategoryId,
