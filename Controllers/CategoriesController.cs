@@ -18,12 +18,9 @@ namespace LumenEstoque.Controllers;
 public class CategoriesController : ControllerBase
 {
     private readonly ICategoryService _categoryService;
-    private readonly IMemoryCache _cache;
-    private const string CacheKey = "categories_cache";
-    public CategoriesController(ICategoryService categoryService, IMemoryCache memoryCache)
+    public CategoriesController(ICategoryService categoryService)
     {
         _categoryService = categoryService;
-        _cache = memoryCache;
     }
 
     /// <summary>
@@ -45,21 +42,8 @@ public class CategoriesController : ControllerBase
     [HttpGet]
     public async Task<ActionResult<PagedList<CategoryReadDTO>>> GetAllAsync([FromQuery] CategoryParameters categoryParameters)
     {
-        if(!_cache.TryGetValue(CacheKey, out PagedList<CategoryReadDTO>? categories))
-        {
-            categories = await _categoryService.GetAllAsync(categoryParameters);
 
-            if (categories != null && categories.Any())
-            {
-                var cacheOptions = new MemoryCacheEntryOptions
-                {
-                    AbsoluteExpirationRelativeToNow = TimeSpan.FromSeconds(30),
-                    SlidingExpiration = TimeSpan.FromSeconds(15),
-                    Priority = CacheItemPriority.High
-                };
-                _cache.Set(CacheKey, categories, cacheOptions);
-            }
-        }
+        var categories = await _categoryService.GetAllAsync(categoryParameters);
 
         return CreatePaginatedResponse(categories);
     }
@@ -81,23 +65,7 @@ public class CategoriesController : ControllerBase
     [HttpGet("{id:int:min(1)}")]
     public async Task<ActionResult<CategoryReadDTO>> GetByIdAsync(int id)
     {
-        var CacheKey = $"category_{id}";
-
-        if (!_cache.TryGetValue($"{CacheKey}_{id}", out CategoryReadDTO? category))
-        {
-            category = await _categoryService.GetByIdAsync(id);
-
-            if (category != null)
-            {
-                var cacheOptions = new MemoryCacheEntryOptions
-                {
-                    AbsoluteExpirationRelativeToNow = TimeSpan.FromSeconds(30),
-                    SlidingExpiration = TimeSpan.FromSeconds(15),
-                    Priority = CacheItemPriority.High
-                };
-                _cache.Set(CacheKey, category, cacheOptions);
-            }
-        }
+        var category = await _categoryService.GetByIdAsync(id);
 
         return Ok(category);
     }
@@ -107,7 +75,6 @@ public class CategoriesController : ControllerBase
     /// </summary>
     /// <remarks>
     /// Requer autenticação e perfil <c>Admin</c>.
-    ///
     /// Exemplo de requisição:
     ///
     ///     POST /api/v1/categories
@@ -124,19 +91,6 @@ public class CategoriesController : ControllerBase
     public async Task<ActionResult<CategoryReadDTO>> CreateAsync([FromBody] CategoryCreateDTO categoryCreateDTO)
     {
         var createdCategory = await _categoryService.CreateAsync(categoryCreateDTO);
-
-        _cache.Remove(CacheKey);
-
-        var cacheKey = $"category_{createdCategory.Id}";
-
-        var cacheOptions = new MemoryCacheEntryOptions
-        {
-            AbsoluteExpirationRelativeToNow = TimeSpan.FromSeconds(30),
-            SlidingExpiration = TimeSpan.FromSeconds(15),
-            Priority = CacheItemPriority.High
-        };
-
-        _cache.Set(cacheKey, createdCategory, cacheOptions);
 
         return Ok(createdCategory);
     }
@@ -166,15 +120,6 @@ public class CategoriesController : ControllerBase
     {
         var updatedCategory = await _categoryService.UpdateAsync(id, categoryUpdateDTO);
 
-        _cache.Set($"CacheCategoria_{id}", updatedCategory, new MemoryCacheEntryOptions
-        {
-            AbsoluteExpirationRelativeToNow = TimeSpan.FromSeconds(30),
-            SlidingExpiration = TimeSpan.FromSeconds(15),
-            Priority = CacheItemPriority.High
-        });
-
-        _cache.Remove(CacheKey);
-
         return Ok(updatedCategory);
     }
 
@@ -194,9 +139,6 @@ public class CategoriesController : ControllerBase
     public async Task<ActionResult<CategoryReadDTO>> DeleteAsync(int id)
     {
         var deletedCategory = await _categoryService.DeleteAsync(id);
-
-        _cache.Remove($"CacheCategoria_{id}");
-        _cache.Remove(CacheKey);
 
         return Ok(deletedCategory);
     }

@@ -18,7 +18,9 @@ public class CategoryService : ICategoryService
     public async Task<PagedList<CategoryReadDTO>> GetAllAsync(CategoryParameters categoryParameters)
     {
         var categories = await PagedList<Category>.ToPagedListAsync(
-            _context.Categories.AsQueryable(),
+            _context.Categories
+            .AsNoTracking()
+            .AsQueryable(),
             categoryParameters.PageNumber,
             categoryParameters.PageSize);
 

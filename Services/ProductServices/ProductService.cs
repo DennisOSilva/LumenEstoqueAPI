@@ -38,6 +38,7 @@ public class ProductService : IProductService
     public async Task<PagedList<ProductReadDTO>> GetAllAsync(ProductParameters productParameters)
     {
         IQueryable<Product> query = _context.Products!
+            .AsNoTracking()
             .Include(p => p.Supplier)
             .Include(p => p.Category);
 
