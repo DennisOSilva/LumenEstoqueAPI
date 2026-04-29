@@ -29,7 +29,8 @@ public static class MovementDTOMappingExtensions
             Reason = movement.Reason,
             ReferenceDoc = movement.ReferenceDoc,
             ProductId = movement.ProductId,
-            CreatedAt = movement.CreatedAt
+            CreatedAt = movement.CreatedAt,
+            ProductName = movement.Product?.Name
         };
     }
 
