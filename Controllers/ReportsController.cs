@@ -34,7 +34,7 @@ namespace LumenEstoque.Controllers
         ///
         /// </remarks>
         /// <returns>Arquivo <c>.xlsx</c> com o relatório de estoque.</returns>
-        [Authorize]
+        //[Authorize]
         [HttpGet("stock")]
         public async Task<ActionResult> GetStockReportAsync()
         {
@@ -58,7 +58,7 @@ namespace LumenEstoque.Controllers
         ///
         /// </remarks>
         /// <returns>Arquivo <c>.xlsx</c> com o relatório de produtos com estoque baixo.</returns>
-        [Authorize]
+        //[Authorize]
         [HttpGet("low-stock")]
         public async Task<ActionResult> GetLowStockReportAsync()
         {
@@ -83,7 +83,7 @@ namespace LumenEstoque.Controllers
         /// </remarks>
         /// <param name="reportParameters">Parâmetros de período para filtragem das movimentações.</param>
         /// <returns>Arquivo <c>.xlsx</c> com o relatório de movimentações no período informado.</returns>
-        [Authorize]
+        //[Authorize]
         [HttpGet("movements")]
         public async Task<ActionResult> GetStockMovementsReportAsync([FromQuery] ReportParameters reportParameters)
         {
