@@ -13,4 +13,5 @@ public class MovementReadDTO
     public string? ReferenceDoc { get; set; }
     public MovementType Type { get; set; }
     public DateTime CreatedAt { get; set; }
+    public string? ProductName { get; set; }
 }
