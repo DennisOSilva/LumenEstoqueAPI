@@ -1,5 +1,6 @@
 ﻿using LumenEstoque.Enums;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
 
 namespace LumenEstoque.Models;
@@ -31,7 +32,7 @@ public class Movement
     [Range(1, int.MaxValue, ErrorMessage = "O valor do ID tem que ser maior que 1")]
     public int ProductId { get; set; }
 
-    [JsonIgnore]
+    [ForeignKey("ProductId")]
     public Product? Product { get; set; }
 
 }
